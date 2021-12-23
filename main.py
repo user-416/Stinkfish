@@ -1,11 +1,22 @@
 from stockfish import Stockfish
 
-def getWorst(moves):
+def getPossible(moves):
+    try:
+        return stinkfish.get_top_moves(moves)
+    except:
+        getPossible(moves-1)           # I don't know how to recursion
+
+
+def getWorst(turn, moves):
     worst = 0
     for index, d in enumerate(moves):
-        if d["Centipawn"] < moves[worst]["Centipawn"]:
-            worst = index
-    
+        if turn == "w":
+            if d["Centipawn"] < moves[worst]["Centipawn"]:
+                worst = index
+        elif turn == "b":
+            if d["Centipawn"] > moves[worst]["Centipawn"]:
+                worst = index
+
     return moves[worst]["Move"]
 
 
@@ -29,9 +40,13 @@ stinkfish._parameters["Contempt"] = 20 # NO DRAWS
 stinkfish.set_elo_rating(200)          # ONLY GOOD MOVES
 
 while True:
-    top = stinkfish.get_top_moves()
+    top = getPossible(100)
     print(top)
-    worst = getWorst(top)       # GET THE BEST MOVE
+
+    turn = fen.split(' ')[1]
+    print("Turn: " + turn)
+
+    worst = getWorst(turn, top)       # GET THE BEST MOVE
     stinkfish.make_moves_from_current_position([worst])
     print("Move:", worst)
     fen = stinkfish.get_fen_position()
