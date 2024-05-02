@@ -10,4 +10,4 @@ pip install stockfish
 ## Install the Stockfish Engine here: 
 https://stockfishchess.org/
 
-**YOU WILL GET AN ERROR IF YOU DO NOT PUT IN THE FULL PATH FOR YOUR STOCKFISH ENGINE EXECUTABLE IN LINE 21!!!**
+**PUT IN THE FILE PATH FOR YOUR STOCKFISH ENGINE EXECUTABLE IN LINE 21!**
